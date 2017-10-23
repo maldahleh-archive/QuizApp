@@ -5,9 +5,10 @@
 //  Created by Mohammed Al-Dahleh on 2017-10-22.
 //  Copyright © 2017 Treehouse. All rights reserved.
 //
+import GameKit
 
 struct QuestionsProvider {
-    let questions: [Question] = [
+    var questions: [Question] = [
         Question(question: "Who was the only US president to serve more than two consecutive terms?",
                  answers: ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"],
                  answer: 1),
@@ -39,4 +40,14 @@ struct QuestionsProvider {
                  answers: ["France", "Germany", "Japan", "Great Britian"],
                  answer: 3)
     ]
+    
+    /*
+         Function to return the next question
+     */
+    func getNextQuestion() -> Question {
+        let selected = GKRandomSource.sharedRandom().nextInt(upperBound: questions.count)
+        let questionSelected = questions[selected]
+        
+        return questionSelected
+    }
 }

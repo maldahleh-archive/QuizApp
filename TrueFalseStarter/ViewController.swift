@@ -135,6 +135,7 @@ class ViewController: UIViewController {
     
     func displayQuestion() {
         if gameManager.isGameOver() {
+            displayGameOver()
             return
         }
         
@@ -176,6 +177,7 @@ class ViewController: UIViewController {
     func displayGameOver() {
         mainDisplayMessage.text = "Game Over!"
         secondaryDisplayMessage.text = "Your score is \(gameManager.correctAnswers) / \(gameManager.totalAnswers)"
+        mainInteractButton.setTitle("Play Again!", for: .normal)
         
         setButtonsHiddenTo(true)
         setMainButtonHiddenTo(false)

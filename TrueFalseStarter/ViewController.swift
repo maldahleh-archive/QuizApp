@@ -18,9 +18,11 @@ class ViewController: UIViewController {
     let questionProvider = QuestionsProvider()
     var currentQuestion: Question!
     
+    // Outlets used for message labels
     @IBOutlet weak var mainDisplayMessage: UILabel!
     @IBOutlet weak var secondaryDisplayMessage: UILabel!
     
+    // Outlets used for answer buttons
     @IBOutlet weak var answerOneBox: UIButton!
     @IBOutlet weak var answerTwoBox: UIButton!
     @IBOutlet weak var answerThreeBox: UIButton!
@@ -35,51 +37,8 @@ class ViewController: UIViewController {
         loadStartUI()
     }
     
-//    func displayQuestion() {
-//        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count)
-//        let questionDictionary = trivia[indexOfSelectedQuestion]
-//        questionField.text = questionDictionary["Question"]
-//        playAgainButton.isHidden = true
-//    }
-//
-//    func displayScore() {
-//        // Hide the answer buttons
-//        trueButton.isHidden = true
-//        falseButton.isHidden = true
-//
-//        // Display play again button
-//        playAgainButton.isHidden = false
-//
-//        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
-//
-//    }
-//
-//    @IBAction func checkAnswer(_ sender: UIButton) {
-//        // Increment the questions asked counter
-//        questionsAsked += 1
-//
-//        let selectedQuestionDict = trivia[indexOfSelectedQuestion]
-//        let correctAnswer = selectedQuestionDict["Answer"]
-//
-//        if (sender === trueButton &&  correctAnswer == "True") || (sender === falseButton && correctAnswer == "False") {
-//            correctQuestions += 1
-//            questionField.text = "Correct!"
-//        } else {
-//            questionField.text = "Sorry, wrong answer!"
-//        }
-//
-//        loadNextRoundWithDelay(seconds: 2)
-//    }
-//
-//    @IBAction func playAgain() {
-//        // Show the answer buttons
-//        trueButton.isHidden = false
-//        falseButton.isHidden = false
-//
-//        questionsAsked = 0
-//        correctQuestions = 0
-//        nextRound()
-//    }
+    // MARK: Functions used for button interaction
+
     @IBAction func mainButtonClicked(_ sender: Any) {
         if let currentTitle = mainInteractButton.currentTitle {
             switch(currentTitle) {
@@ -179,6 +138,21 @@ class ViewController: UIViewController {
     
     // MARK: UI Helper Methods
     
+    func prepareForNewGame() {
+        setButtonsHiddenTo(false)
+        setMainButtonHiddenTo(true)
+        
+        gameManager = GameManager(questionProvider: questionProvider)
+        displayQuestion()
+    }
+    
+    func resetTitleColour() {
+        answerOneBox.setTitleColor(.white, for: .normal)
+        answerTwoBox.setTitleColor(.white, for: .normal)
+        answerThreeBox.setTitleColor(.white, for: .normal)
+        answerFourBox.setTitleColor(.white, for: .normal)
+    }
+    
     func setButtonsHiddenTo(_ value: Bool) {
         answerOneBox.isHidden = value
         answerTwoBox.isHidden = value
@@ -195,21 +169,6 @@ class ViewController: UIViewController {
         answerTwoBox.isEnabled = value
         answerThreeBox.isEnabled = value
         answerFourBox.isEnabled = value
-    }
-    
-    func prepareForNewGame() {
-        setButtonsHiddenTo(false)
-        setMainButtonHiddenTo(true)
-        
-        gameManager = GameManager(questionProvider: questionProvider)
-        displayQuestion()
-    }
-    
-    func resetTitleColour() {
-        answerOneBox.setTitleColor(UIColor.black, for: .normal)
-        answerTwoBox.setTitleColor(UIColor.black, for: .normal)
-        answerThreeBox.setTitleColor(UIColor.black, for: .normal)
-        answerFourBox.setTitleColor(UIColor.black, for: .normal)
     }
     
     // MARK: Helper Methods

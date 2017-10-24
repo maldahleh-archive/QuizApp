@@ -11,10 +11,11 @@ import GameKit
 import AudioToolbox
 
 class ViewController: UIViewController {
-    // TODO: Audio Manager
+    // TODO: Audio Manager, lightning mode, no repetiton, 
     var gameSound: SystemSoundID = 0
     
     var gameManager: GameManager!
+    
     let questionProvider = QuestionsProvider()
     var currentQuestion: Question!
     
@@ -42,8 +43,7 @@ class ViewController: UIViewController {
     @IBAction func mainButtonClicked(_ sender: Any) {
         if let currentTitle = mainInteractButton.currentTitle {
             switch(currentTitle) {
-            case "Start!", "Play Again!":
-                prepareForNewGame()
+            case "Start!", "Play Again!": prepareForNewGame()
             default: print("Unknown....")
             }
         }

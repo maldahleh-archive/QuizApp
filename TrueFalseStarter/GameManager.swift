@@ -26,6 +26,6 @@ class GameManager {
     }
     
     func isGameOver() -> Bool {
-        return totalAnswers == questionProvider.questions.count
+        return totalAnswers == questionProvider.totalQuestions
     }
 }

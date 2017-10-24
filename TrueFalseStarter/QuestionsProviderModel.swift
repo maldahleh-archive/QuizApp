@@ -7,7 +7,10 @@
 //
 import GameKit
 
-struct QuestionsProvider {
+class QuestionsProvider {
+    // Store the total number of questions
+    let totalQuestions = 10
+    // Store a list of all the questions
     var questions: [Question] = [
         Question(question: "Who was the only US president to serve more than two consecutive terms?",
                  answers: ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"],
@@ -48,6 +51,7 @@ struct QuestionsProvider {
         let selected = GKRandomSource.sharedRandom().nextInt(upperBound: questions.count)
         let questionSelected = questions[selected]
         
+        questions.remove(at: selected)
         return questionSelected
     }
 }

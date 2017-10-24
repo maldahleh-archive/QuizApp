@@ -11,12 +11,12 @@ import GameKit
 import AudioToolbox
 
 class ViewController: UIViewController {
-    // TODO: Audio Manager, lightning mode, no repetiton, 
+    // TODO: Audio Manager, lightning mode
     var gameSound: SystemSoundID = 0
     
     var gameManager: GameManager!
     
-    let questionProvider = QuestionsProvider()
+    var questionProvider: QuestionsProvider!
     var currentQuestion: Question!
     
     // Outlets used for message labels
@@ -142,6 +142,7 @@ class ViewController: UIViewController {
         setButtonsHiddenTo(false)
         setMainButtonHiddenTo(true)
         
+        questionProvider = QuestionsProvider()
         gameManager = GameManager(questionProvider: questionProvider)
         displayQuestion()
     }

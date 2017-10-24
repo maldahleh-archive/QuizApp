@@ -83,12 +83,9 @@ class ViewController: UIViewController {
     @IBAction func mainButtonClicked(_ sender: Any) {
         if let currentTitle = mainInteractButton.currentTitle {
             switch(currentTitle) {
-            case "Start!":
-                setButtonsHiddenTo(false)
-                
-                displayQuestion()
-            default:
-                print("Unknown....")
+            case "Start!", "Play Again!":
+                prepareForNewGame()
+            default: print("Unknown....")
             }
         }
     }
@@ -129,8 +126,6 @@ class ViewController: UIViewController {
         
         setButtonsHiddenTo(true)
         mainInteractButton.setTitle("Start!", for: .normal)
-        
-        gameManager = GameManager(questionProvider: questionProvider)
     }
     
     func displayQuestion() {
@@ -170,7 +165,6 @@ class ViewController: UIViewController {
         secondaryDisplayMessage.text = ""
         
         resetTitleColour()
-        setMainButtonHiddenTo(true)
         setButtonUsabilityTo(true)
     }
     
@@ -203,13 +197,20 @@ class ViewController: UIViewController {
         answerFourBox.isEnabled = value
     }
     
+    func prepareForNewGame() {
+        setButtonsHiddenTo(false)
+        setMainButtonHiddenTo(true)
+        
+        gameManager = GameManager(questionProvider: questionProvider)
+        displayQuestion()
+    }
+    
     func resetTitleColour() {
         answerOneBox.setTitleColor(UIColor.black, for: .normal)
         answerTwoBox.setTitleColor(UIColor.black, for: .normal)
         answerThreeBox.setTitleColor(UIColor.black, for: .normal)
         answerFourBox.setTitleColor(UIColor.black, for: .normal)
     }
-
     
     // MARK: Helper Methods
     

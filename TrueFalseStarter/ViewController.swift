@@ -11,13 +11,12 @@ import GameKit
 import AudioToolbox
 
 class ViewController: UIViewController {
-    // TODO: Game Manager, Audio Manager
+    // TODO: Audio Manager
     var gameSound: SystemSoundID = 0
     
-    var questionProvider: QuestionsProvider = QuestionsProvider()
-    var currentQuestion: Question = Question(question: "Who was the only US president to serve more than two consecutive terms?",
-                                             answers: ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"],
-                                             answer: 1)
+    var gameManager: GameManager!
+    let questionProvider = QuestionsProvider()
+    var currentQuestion: Question!
     
     @IBOutlet weak var mainDisplayMessage: UILabel!
     @IBOutlet weak var secondaryDisplayMessage: UILabel!
@@ -85,7 +84,7 @@ class ViewController: UIViewController {
         if let currentTitle = mainInteractButton.currentTitle {
             switch(currentTitle) {
             case "Start!":
-                setButtonsHiddenTo(value: false)
+                setButtonsHiddenTo(false)
                 
                 displayQuestion()
             default:
@@ -100,10 +99,12 @@ class ViewController: UIViewController {
         
         if currentQuestion.isAnswerCorrect(usingID: selectedAnswer) {
             button.setTitleColor(UIColor.green, for: .normal)
+            gameManager.logCorrectAnswer()
             
             secondaryDisplayMessage.text = "You're right!"
         } else {
             button.setTitleColor(UIColor.red, for: .normal)
+            gameManager.logIncorrectAnswer()
             
             secondaryDisplayMessage.text = "Sorry, you're wrong!"
             
@@ -126,11 +127,17 @@ class ViewController: UIViewController {
         mainDisplayMessage.text = "Welcome!"
         secondaryDisplayMessage.text = "Click below to start."
         
-        setButtonsHiddenTo(value: true)
+        setButtonsHiddenTo(true)
         mainInteractButton.setTitle("Start!", for: .normal)
+        
+        gameManager = GameManager(questionProvider: questionProvider)
     }
     
     func displayQuestion() {
+        if gameManager.isGameOver() {
+            return
+        }
+        
         currentQuestion = questionProvider.getNextQuestion()
         
         switch(currentQuestion.answers.count) {
@@ -162,20 +169,28 @@ class ViewController: UIViewController {
         secondaryDisplayMessage.text = ""
         
         resetTitleColour()
-        setVisibilityOfMainButtonTo(value: true)
+        setMainButtonHiddenTo(true)
         setButtonUsabilityTo(true)
+    }
+    
+    func displayGameOver() {
+        mainDisplayMessage.text = "Game Over!"
+        secondaryDisplayMessage.text = "Your score is \(gameManager.correctAnswers) / \(gameManager.totalAnswers)"
+        
+        setButtonsHiddenTo(true)
+        setMainButtonHiddenTo(false)
     }
     
     // MARK: UI Helper Methods
     
-    func setButtonsHiddenTo(value: Bool) {
+    func setButtonsHiddenTo(_ value: Bool) {
         answerOneBox.isHidden = value
         answerTwoBox.isHidden = value
         answerThreeBox.isHidden = value
         answerFourBox.isHidden = value
     }
     
-    func setVisibilityOfMainButtonTo(value: Bool) {
+    func setMainButtonHiddenTo(_ value: Bool) {
         mainInteractButton.isHidden = value
     }
     

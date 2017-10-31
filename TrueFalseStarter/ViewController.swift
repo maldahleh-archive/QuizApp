@@ -11,13 +11,14 @@ import GameKit
 import AudioToolbox
 
 class ViewController: UIViewController {
-    // TODO: Audio Manager, lightning mode
+    // TODO: Audio Manager
     var gameSound: SystemSoundID = 0
     
     var gameManager: GameManager!
     
     var questionProvider: QuestionsProvider!
     var currentQuestion: Question!
+    var currentTask: DispatchWorkItem!
     
     // Outlets used for message labels
     @IBOutlet weak var mainDisplayMessage: UILabel!
@@ -50,6 +51,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func questionButtonClicked(_ sender: Any) {
+        cancelTaskNamed(currentTask)
+        
         let button = sender as! UIButton
         let selectedAnswer = button.tag
         
@@ -125,6 +128,26 @@ class ViewController: UIViewController {
         
         resetTitleColour()
         setButtonUsabilityTo(true)
+        
+        currentTask = DispatchWorkItem { self.displayTimedOut() }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 15, execute: currentTask)
+    }
+    
+    func displayTimedOut() {
+        gameManager.logIncorrectAnswer()
+        
+        secondaryDisplayMessage.text = "You ran out of time!"
+        
+        switch(currentQuestion.answer) {
+        case 0: answerOneBox.setTitleColor(UIColor.green, for: .normal)
+        case 1: answerTwoBox.setTitleColor(UIColor.green, for: .normal)
+        case 2: answerThreeBox.setTitleColor(UIColor.green, for: .normal)
+        case 3: answerFourBox.setTitleColor(UIColor.green, for: .normal)
+        default: return
+        }
+        
+        setButtonUsabilityTo(false)
+        loadNextRoundWithDelay(seconds: 2)
     }
     
     func displayGameOver() {
@@ -184,6 +207,10 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
             self.displayQuestion()
         }
+    }
+    
+    func cancelTaskNamed(_ task: DispatchWorkItem) {
+        task.cancel()
     }
     
     func loadGameStartSound() {

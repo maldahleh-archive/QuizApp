@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A1FD21C1F9F95A9001DBC04 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FD21B1F9F95A9001DBC04 /* AudioManager.swift */; };
 		4AB9F2E31F9EBCE400519834 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB9F2E21F9EBCE400519834 /* GameManager.swift */; };
 		4AD04F801F9D529D000E350F /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD04F7F1F9D529D000E350F /* QuestionModel.swift */; };
 		4AD04F821F9D5983000E350F /* QuestionsProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD04F811F9D5983000E350F /* QuestionsProviderModel.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A1FD21B1F9F95A9001DBC04 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		4AB9F2E21F9EBCE400519834 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		4AD04F7F1F9D529D000E350F /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		4AD04F811F9D5983000E350F /* QuestionsProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsProviderModel.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				4AD04F7F1F9D529D000E350F /* QuestionModel.swift */,
 				4AD04F811F9D5983000E350F /* QuestionsProviderModel.swift */,
 				4AB9F2E21F9EBCE400519834 /* GameManager.swift */,
+				4A1FD21B1F9F95A9001DBC04 /* AudioManager.swift */,
 			);
 			path = TrueFalseStarter;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A1FD21C1F9F95A9001DBC04 /* AudioManager.swift in Sources */,
 				4AD04F801F9D529D000E350F /* QuestionModel.swift in Sources */,
 				97093D3E1C913506001275BC /* ViewController.swift in Sources */,
 				97093D3C1C913506001275BC /* AppDelegate.swift in Sources */,

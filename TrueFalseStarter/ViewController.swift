@@ -10,11 +10,15 @@ import UIKit
 import GameKit
 
 class ViewController: UIViewController {
+    // Store the audio manager that handles playing sound
     let audioManager = AudioManager()
-    var gameManager: GameManager!
+    // Store the game manager that handles answers
+    let gameManager = GameManager()
     
+    // Access to question information
     var questionProvider: QuestionsProvider!
     var currentQuestion: Question!
+    // Store the task used for lightning mode
     var currentTask: DispatchWorkItem!
     
     // Outlets used for message labels
@@ -166,7 +170,7 @@ class ViewController: UIViewController {
         setMainButtonHiddenTo(true)
         
         questionProvider = QuestionsProvider()
-        gameManager = GameManager(questionProvider: questionProvider)
+        gameManager.setupWith(questionProvider: questionProvider)
         displayQuestion()
     }
     

@@ -12,12 +12,12 @@ class QuestionsProvider {
     let totalQuestions = 10
     // Store a list of all the questions
     var questions: [Question] = [
-        Question(question: "Who was the only US president to serve more than two consecutive terms?",
-                 answers: ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"],
+        Question(question: "Lightning never strikes in the same place twice.",
+                 answers: ["True", "False"],
                  answer: 1),
-        Question(question: "Which of the following countries has the most residents?",
-                 answers: ["Nigeria", "Russia", "Iran", "Vietnam"],
-                 answer: 0),
+        Question(question: "What team did Babe Ruth play for before joining the Boston Red Sox?",
+                 answers: ["New York Yankees", "Baltimore Orioles", "Cincinnati Reds"],
+                 answer: 1),
         Question(question: "In what year was the United Nations founded?",
                  answers: ["1918", "1919", "1945", "1954"],
                  answer: 2),

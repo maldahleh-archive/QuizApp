@@ -8,12 +8,9 @@
 
 import UIKit
 import GameKit
-import AudioToolbox
 
 class ViewController: UIViewController {
-    // TODO: Audio Manager
-    var gameSound: SystemSoundID = 0
-    
+    let audioManager = AudioManager()
     var gameManager: GameManager!
     
     var questionProvider: QuestionsProvider!
@@ -34,8 +31,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGameStartSound()
-        playGameStartSound()
+        
+        audioManager.playGameStartSound()
         loadStartUI()
     }
     
@@ -59,11 +56,13 @@ class ViewController: UIViewController {
         if currentQuestion.isAnswerCorrect(usingID: selectedAnswer) {
             button.setTitleColor(UIColor.green, for: .normal)
             gameManager.logCorrectAnswer()
+            audioManager.playRightAnswerSound()
             
             secondaryDisplayMessage.text = "You're right!"
         } else {
             button.setTitleColor(UIColor.red, for: .normal)
             gameManager.logIncorrectAnswer()
+            audioManager.playWrongAnswerSound()
             
             secondaryDisplayMessage.text = "Sorry, you're wrong!"
             
@@ -135,6 +134,7 @@ class ViewController: UIViewController {
     
     func displayTimedOut() {
         gameManager.logIncorrectAnswer()
+        audioManager.playWrongAnswerSound()
         
         secondaryDisplayMessage.text = "You ran out of time!"
         
@@ -211,15 +211,5 @@ class ViewController: UIViewController {
     
     func cancelTaskNamed(_ task: DispatchWorkItem) {
         task.cancel()
-    }
-    
-    func loadGameStartSound() {
-        let pathToSoundFile = Bundle.main.path(forResource: "GameSound", ofType: "wav")
-        let soundURL = URL(fileURLWithPath: pathToSoundFile!)
-        AudioServicesCreateSystemSoundID(soundURL as CFURL, &gameSound)
-    }
-    
-    func playGameStartSound() {
-        AudioServicesPlaySystemSound(gameSound)
     }
 }

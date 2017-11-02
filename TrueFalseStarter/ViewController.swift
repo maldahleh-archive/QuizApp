@@ -40,18 +40,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         audioManager.playGameStartSound()
-        loadStartUI()
+        setButtonsHiddenTo(true)
     }
     
     // MARK: Functions used for button interaction
 
     @IBAction func mainButtonClicked(_ sender: Any) {
-        if let currentTitle = mainInteractButton.currentTitle {
-            switch(currentTitle) {
-            case "Start!", "Play Again!": prepareForNewGame()
-            default: print("Unknown....")
-            }
-        }
+        prepareForNewGame()
     }
     
     @IBAction func questionButtonClicked(_ sender: Any) {
@@ -61,23 +56,23 @@ class ViewController: UIViewController {
         let selectedAnswer = button.tag
         
         if currentQuestion.isAnswerCorrect(usingID: selectedAnswer) {
-            button.setTitleColor(UIColor.green, for: .normal)
+            button.backgroundColor = UIColor.green
             gameManager.logCorrectAnswer()
             audioManager.playRightAnswerSound()
             
             secondaryDisplayMessage.text = "You're right!"
         } else {
-            button.setTitleColor(UIColor.red, for: .normal)
+            button.backgroundColor = UIColor.red
             gameManager.logIncorrectAnswer()
             audioManager.playWrongAnswerSound()
             
             secondaryDisplayMessage.text = "Sorry, you're wrong!"
             
             switch(currentQuestion.answer) {
-            case 0: answerOneBox.setTitleColor(UIColor.green, for: .normal)
-            case 1: answerTwoBox.setTitleColor(UIColor.green, for: .normal)
-            case 2: answerThreeBox.setTitleColor(UIColor.green, for: .normal)
-            case 3: answerFourBox.setTitleColor(UIColor.green, for: .normal)
+            case 0: answerOneBox.backgroundColor = UIColor.green
+            case 1: answerTwoBox.backgroundColor = UIColor.green
+            case 2: answerThreeBox.backgroundColor = UIColor.green
+            case 3: answerFourBox.backgroundColor = UIColor.green
             default: return
             }
         }
@@ -87,14 +82,6 @@ class ViewController: UIViewController {
     }
     
     // MARK: Main UI Methods
-    
-    func loadStartUI() {
-        mainDisplayMessage.text = "Welcome!"
-        secondaryDisplayMessage.text = "Click below to start."
-        
-        setButtonsHiddenTo(true)
-        mainInteractButton.setTitle("Start!", for: .normal)
-    }
     
     func displayQuestion() {
         if gameManager.isGameOver() {

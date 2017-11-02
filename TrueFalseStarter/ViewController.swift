@@ -94,6 +94,7 @@ class ViewController: UIViewController {
     func displayQuestion() {
         isGameOver()
         currentQuestion = questionProvider.getNextQuestion()
+        print("called")
         selectAndUpdateColour()
         
         switch(currentQuestion.answers.count) {
@@ -184,6 +185,7 @@ class ViewController: UIViewController {
         
         mainDisplayMessage.textColor = colour.textColour
         secondaryDisplayMessage.textColor = colour.textColour
+        timerLabel.textColor = colour.textColour
         
         answerOneBox.backgroundColor = colour.secondaryColour
         answerTwoBox.backgroundColor = colour.secondaryColour

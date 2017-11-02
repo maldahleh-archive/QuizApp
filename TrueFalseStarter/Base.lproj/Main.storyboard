@@ -109,7 +109,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="615-RD-PHF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="615-RD-PHF">
                                 <rect key="frame" x="20" y="20" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="sEY-Gh-POx"/>
@@ -148,6 +148,7 @@
                         <outlet property="mainDisplayMessage" destination="I3V-ih-1Ky" id="5gV-8N-8Sw"/>
                         <outlet property="mainInteractButton" destination="K17-uy-MvB" id="EkD-bH-ezC"/>
                         <outlet property="secondaryDisplayMessage" destination="Ys9-6L-rYR" id="juK-Tt-Eqd"/>
+                        <outlet property="timerLabel" destination="615-RD-PHF" id="40K-jP-K3z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

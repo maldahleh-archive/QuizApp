@@ -21,12 +21,18 @@ class ViewController: UIViewController {
     // Access to question information
     var questionProvider: QuestionsProvider!
     var currentQuestion: Question!
-    // Store the task used for lightning mode
-    var currentTask: DispatchWorkItem!
+    
+    // Total lightning mode seconds
+    let totalLightningModeSeconds = 15
+    // The current countdown
+    var lightningModeSecondsLeft = 15
+    // Timer for lightning mode and label
+    var timer = Timer()
     
     // Outlets used for message labels
     @IBOutlet weak var mainDisplayMessage: UILabel!
     @IBOutlet weak var secondaryDisplayMessage: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     
     // Outlets used for answer buttons
     @IBOutlet weak var answerOneBox: UIButton!
@@ -50,7 +56,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func questionButtonClicked(_ sender: Any) {
-        cancelTaskNamed(currentTask)
+        cancelTimer()
         
         let button = sender as! UIButton
         let selectedAnswer = button.tag
@@ -84,11 +90,7 @@ class ViewController: UIViewController {
     // MARK: Main UI Methods
     
     func displayQuestion() {
-        if gameManager.isGameOver() {
-            displayGameOver()
-            return
-        }
-        
+        isGameOver()
         currentQuestion = questionProvider.getNextQuestion()
         selectAndUpdateColour()
         
@@ -122,8 +124,7 @@ class ViewController: UIViewController {
         
         setButtonUsabilityTo(true)
         
-        currentTask = DispatchWorkItem { self.displayTimedOut() }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 15, execute: currentTask)
+        runTimer()
     }
     
     func displayTimedOut() {
@@ -142,6 +143,12 @@ class ViewController: UIViewController {
         
         setButtonUsabilityTo(false)
         loadNextRoundWithDelay(seconds: 2)
+    }
+    
+    func isGameOver() {
+        if gameManager.isGameOver() {
+            displayGameOver()
+        }
     }
     
     func displayGameOver() {
@@ -215,6 +222,31 @@ class ViewController: UIViewController {
         secondaryDisplayMessage.textColor = colourProvider.startingColours.textColour
     }
     
+    // MARK: Timer helper methods
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.timerTicked)), userInfo: nil, repeats: true)
+        timerLabel.textColor = colour.textColour
+    }
+    
+    func timerTicked() {
+        if lightningModeSecondsLeft == 0 {
+            cancelTimer()
+            return
+        }
+        
+        timerLabel.text = String.init(lightningModeSecondsLeft)
+        lightningModeSecondsLeft -= 1
+    }
+    
+    func cancelTimer() {
+        timer.invalidate()
+        lightningModeSecondsLeft = totalLightningModeSeconds
+        
+        timerLabel.text = ""
+        displayTimedOut()
+    }
+    
     // MARK: Helper Methods
     
     func loadNextRoundWithDelay(seconds: Int) {
@@ -227,9 +259,5 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
             self.displayQuestion()
         }
-    }
-    
-    func cancelTaskNamed(_ task: DispatchWorkItem) {
-        task.cancel()
     }
 }

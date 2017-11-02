@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     // Store the game manager that handles answers
     let gameManager = GameManager()
     
+    // Access to colour information
+    var colourProvider: ColourProvider!
+    var colour: Colour!
     // Access to question information
     var questionProvider: QuestionsProvider!
     var currentQuestion: Question!
@@ -100,6 +103,7 @@ class ViewController: UIViewController {
         }
         
         currentQuestion = questionProvider.getNextQuestion()
+        selectAndUpdateColour()
         
         switch(currentQuestion.answers.count) {
         case 2:
@@ -129,7 +133,6 @@ class ViewController: UIViewController {
         mainDisplayMessage.text = currentQuestion.question
         secondaryDisplayMessage.text = ""
         
-        resetTitleColour()
         setButtonUsabilityTo(true)
         
         currentTask = DispatchWorkItem { self.displayTimedOut() }
@@ -155,6 +158,8 @@ class ViewController: UIViewController {
     }
     
     func displayGameOver() {
+        resetUIColour()
+        
         mainDisplayMessage.text = "Game Over!"
         secondaryDisplayMessage.text = "Your score is \(gameManager.correctAnswers) / \(gameManager.totalAnswers)"
         mainInteractButton.setTitle("Play Again!", for: .normal)
@@ -169,16 +174,33 @@ class ViewController: UIViewController {
         setButtonsHiddenTo(false)
         setMainButtonHiddenTo(true)
         
+        colourProvider = ColourProvider()
         questionProvider = QuestionsProvider()
         gameManager.setupWith(questionProvider: questionProvider)
         displayQuestion()
     }
     
-    func resetTitleColour() {
-        answerOneBox.setTitleColor(.white, for: .normal)
-        answerTwoBox.setTitleColor(.white, for: .normal)
-        answerThreeBox.setTitleColor(.white, for: .normal)
-        answerFourBox.setTitleColor(.white, for: .normal)
+    func selectAndUpdateColour() {
+        colour = colourProvider.randomColour()
+        
+        self.view.backgroundColor = colour.mainColour
+        
+        mainDisplayMessage.textColor = colour.textColour
+        secondaryDisplayMessage.textColor = colour.textColour
+        
+        answerOneBox.backgroundColor = colour.secondaryColour
+        answerTwoBox.backgroundColor = colour.secondaryColour
+        answerThreeBox.backgroundColor = colour.secondaryColour
+        answerFourBox.backgroundColor = colour.secondaryColour
+        
+        setTitleColour()
+    }
+    
+    func setTitleColour() {
+        answerOneBox.setTitleColor(colour.textColour, for: .normal)
+        answerTwoBox.setTitleColor(colour.textColour, for: .normal)
+        answerThreeBox.setTitleColor(colour.textColour, for: .normal)
+        answerFourBox.setTitleColor(colour.textColour, for: .normal)
     }
     
     func setButtonsHiddenTo(_ value: Bool) {
@@ -197,6 +219,13 @@ class ViewController: UIViewController {
         answerTwoBox.isEnabled = value
         answerThreeBox.isEnabled = value
         answerFourBox.isEnabled = value
+    }
+    
+    func resetUIColour() {
+        self.view.backgroundColor = colourProvider.startingColours.mainColour
+        
+        mainDisplayMessage.textColor = colourProvider.startingColours.textColour
+        secondaryDisplayMessage.textColor = colourProvider.startingColours.textColour
     }
     
     // MARK: Helper Methods

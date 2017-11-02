@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func questionButtonClicked(_ sender: Any) {
-        cancelTimer()
+        cancelTimerAsTimedOut(false)
         
         let button = sender as! UIButton
         let selectedAnswer = button.tag
@@ -92,9 +92,12 @@ class ViewController: UIViewController {
     // MARK: Main UI Methods
     
     func displayQuestion() {
-        isGameOver()
+        if gameManager.isGameOver() {
+            displayGameOver()
+            return
+        }
+        
         currentQuestion = questionProvider.getNextQuestion()
-        print("called")
         selectAndUpdateColour()
         
         switch(currentQuestion.answers.count) {
@@ -147,12 +150,6 @@ class ViewController: UIViewController {
         setButtonTextToBlack()
         setButtonUsabilityTo(false)
         loadNextRoundWithDelay(seconds: 2)
-    }
-    
-    func isGameOver() {
-        if gameManager.isGameOver() {
-            displayGameOver()
-        }
     }
     
     func displayGameOver() {
@@ -250,17 +247,20 @@ class ViewController: UIViewController {
             timerLabel.text = String(lightningModeSecondsLeft)
             lightningModeSecondsLeft = lightningModeSecondsLeft - 1
         } else {
-            cancelTimer()
+            cancelTimerAsTimedOut(true)
         }
     }
     
-    func cancelTimer() {
+    func cancelTimerAsTimedOut(_ timedOut: Bool) {
         lightningModeSecondsLeft = totalLightningModeSeconds
         timerLabel.text = ""
-        displayTimedOut()
         
         timer?.invalidate()
         isTimerStarted = false
+        
+        if timedOut {
+            displayTimedOut()
+        }
     }
     
     // MARK: Helper Methods

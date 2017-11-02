@@ -27,7 +27,8 @@ class ViewController: UIViewController {
     // The current countdown
     var lightningModeSecondsLeft = 15
     // Timer for lightning mode and label
-    var timer = Timer()
+    weak var timer: Timer!
+    var isTimerStarted = false
     
     // Outlets used for message labels
     @IBOutlet weak var mainDisplayMessage: UILabel!
@@ -83,6 +84,7 @@ class ViewController: UIViewController {
             }
         }
         
+        setButtonTextToBlack()
         setButtonUsabilityTo(false)
         loadNextRoundWithDelay(seconds: 2)
     }
@@ -141,6 +143,7 @@ class ViewController: UIViewController {
         default: return
         }
         
+        setButtonTextToBlack()
         setButtonUsabilityTo(false)
         loadNextRoundWithDelay(seconds: 2)
     }
@@ -215,6 +218,14 @@ class ViewController: UIViewController {
         answerFourBox.isEnabled = value
     }
     
+    // Used when displaying answers for visbility
+    func setButtonTextToBlack() {
+        answerOneBox.setTitleColor(.black, for: .normal)
+        answerTwoBox.setTitleColor(.black, for: .normal)
+        answerThreeBox.setTitleColor(.black, for: .normal)
+        answerFourBox.setTitleColor(.black, for: .normal)
+    }
+    
     func resetUIColour() {
         self.view.backgroundColor = colourProvider.startingColours.mainColour
         
@@ -225,26 +236,29 @@ class ViewController: UIViewController {
     // MARK: Timer helper methods
     
     func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.timerTicked)), userInfo: nil, repeats: true)
-        timerLabel.textColor = colour.textColour
+        if !isTimerStarted {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: #selector(timerTicked), userInfo: nil, repeats: true)
+            timerLabel.textColor = colour.textColour
+            isTimerStarted = true
+        }
     }
     
     func timerTicked() {
-        if lightningModeSecondsLeft == 0 {
+        if lightningModeSecondsLeft > 0 {
+            timerLabel.text = String(lightningModeSecondsLeft)
+            lightningModeSecondsLeft = lightningModeSecondsLeft - 1
+        } else {
             cancelTimer()
-            return
         }
-        
-        timerLabel.text = String.init(lightningModeSecondsLeft)
-        lightningModeSecondsLeft -= 1
     }
     
     func cancelTimer() {
-        timer.invalidate()
         lightningModeSecondsLeft = totalLightningModeSeconds
-        
         timerLabel.text = ""
         displayTimedOut()
+        
+        timer?.invalidate()
+        isTimerStarted = false
     }
     
     // MARK: Helper Methods

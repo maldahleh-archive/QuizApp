@@ -53,6 +53,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4AFA7E931FACBCEB00EF9C86 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				97093D521C932116001275BC /* GameSound.wav */,
+				4A44720E1FAA56660093748A /* WrongSound.wav */,
+				4A44720C1FAA56380093748A /* RightSound.wav */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		4AFA7E941FACBD0300EF9C86 /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				4AD04F7F1F9D529D000E350F /* QuestionModel.swift */,
+				4AD04F811F9D5983000E350F /* QuestionsProvider.swift */,
+			);
+			path = Questions;
+			sourceTree = "<group>";
+		};
+		4AFA7E951FACBD1800EF9C86 /* Colour */ = {
+			isa = PBXGroup;
+			children = (
+				4AD534951FAA9E2600388089 /* ColourProvider.swift */,
+				4AD534971FAAA13F00388089 /* ColourModel.swift */,
+			);
+			path = Colour;
+			sourceTree = "<group>";
+		};
 		97093D2F1C913506001275BC = {
 			isa = PBXGroup;
 			children = (
@@ -72,21 +100,17 @@
 		97093D3A1C913506001275BC /* TrueFalseStarter */ = {
 			isa = PBXGroup;
 			children = (
-				4A44720E1FAA56660093748A /* WrongSound.wav */,
-				4A44720C1FAA56380093748A /* RightSound.wav */,
+				4AFA7E951FACBD1800EF9C86 /* Colour */,
+				4AFA7E941FACBD0300EF9C86 /* Questions */,
+				4AFA7E931FACBCEB00EF9C86 /* Sound */,
 				97093D3B1C913506001275BC /* AppDelegate.swift */,
 				97093D3D1C913506001275BC /* ViewController.swift */,
 				97093D3F1C913506001275BC /* Main.storyboard */,
 				97093D421C913506001275BC /* Assets.xcassets */,
 				97093D441C913506001275BC /* LaunchScreen.storyboard */,
 				97093D471C913506001275BC /* Info.plist */,
-				97093D521C932116001275BC /* GameSound.wav */,
-				4AD04F7F1F9D529D000E350F /* QuestionModel.swift */,
-				4AD04F811F9D5983000E350F /* QuestionsProvider.swift */,
 				4AB9F2E21F9EBCE400519834 /* GameManager.swift */,
 				4A1FD21B1F9F95A9001DBC04 /* AudioManager.swift */,
-				4AD534951FAA9E2600388089 /* ColourProvider.swift */,
-				4AD534971FAAA13F00388089 /* ColourModel.swift */,
 			);
 			path = TrueFalseStarter;
 			sourceTree = "<group>";

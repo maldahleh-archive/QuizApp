@@ -61,7 +61,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="hYB-tq-z0l"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="False"/>
                                         <connections>
@@ -74,7 +74,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Z7H-0D-Cvw"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="False"/>
                                         <connections>
@@ -87,7 +87,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Tai-Di-xFP"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="False"/>
                                         <connections>
@@ -100,7 +100,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="zJD-Gl-eKo"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="True"/>
                                         <connections>

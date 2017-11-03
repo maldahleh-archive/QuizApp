@@ -12,10 +12,4 @@ struct Colour {
     let mainColour: UIColor
     let secondaryColour: UIColor
     let textColour: UIColor
-    
-    init (mainColour: UIColor, secondaryColour: UIColor, textColour: UIColor) {
-        self.mainColour = mainColour
-        self.secondaryColour = secondaryColour
-        self.textColour = textColour
-    }
 }

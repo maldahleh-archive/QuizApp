@@ -56,6 +56,7 @@
 		4AFA7E931FACBCEB00EF9C86 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				4A1FD21B1F9F95A9001DBC04 /* AudioManager.swift */,
 				97093D521C932116001275BC /* GameSound.wav */,
 				4A44720E1FAA56660093748A /* WrongSound.wav */,
 				4A44720C1FAA56380093748A /* RightSound.wav */,
@@ -110,7 +111,6 @@
 				97093D441C913506001275BC /* LaunchScreen.storyboard */,
 				97093D471C913506001275BC /* Info.plist */,
 				4AB9F2E21F9EBCE400519834 /* GameManager.swift */,
-				4A1FD21B1F9F95A9001DBC04 /* AudioManager.swift */,
 			);
 			path = TrueFalseStarter;
 			sourceTree = "<group>";

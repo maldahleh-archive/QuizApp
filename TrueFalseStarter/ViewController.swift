@@ -140,10 +140,10 @@ class ViewController: UIViewController {
         secondaryDisplayMessage.text = "You ran out of time!"
         
         switch(currentQuestion.answer) {
-        case 0: answerOneBox.setTitleColor(UIColor.green, for: .normal)
-        case 1: answerTwoBox.setTitleColor(UIColor.green, for: .normal)
-        case 2: answerThreeBox.setTitleColor(UIColor.green, for: .normal)
-        case 3: answerFourBox.setTitleColor(UIColor.green, for: .normal)
+        case 0: answerOneBox.backgroundColor = UIColor.green
+        case 1: answerTwoBox.backgroundColor = UIColor.green
+        case 2: answerThreeBox.backgroundColor = UIColor.green
+        case 3: answerFourBox.backgroundColor = UIColor.green
         default: return
         }
         

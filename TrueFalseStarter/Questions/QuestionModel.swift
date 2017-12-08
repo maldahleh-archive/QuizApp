@@ -3,7 +3,7 @@
 //  TrueFalseStarter
 //
 //  Created by Mohammed Al-Dahleh on 2017-10-22.
-//  Copyright © 2017 Treehouse. All rights reserved.
+//  Copyright © 2017 Mohammed Al-Dahleh. All rights reserved.
 //
 
 struct Question {
